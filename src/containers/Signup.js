@@ -32,22 +32,6 @@ export default function Signup(props) {
     return fields.confirmationCode.length > 0;
   }
 
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-
-  //   setIsLoading(true);
-
-  //   setNewUser('test');
-
-  //   setIsLoading(false);
-  // }
-
-  // async function handleConfirmationSubmit(event) {
-  //   event.preventDefault();
-
-  //   setIsLoading(true);
-  // }
-
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -61,10 +45,8 @@ export default function Signup(props) {
       setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {
-      // console.log(e);
       if (e.code === 'UsernameExistsException') {
         const unconfirmedUser = await Auth.resendSignUp(fields.email);
-        // console.log(unconfirmedUser);
         setNewUser(unconfirmedUser);
         setIsLoading(false);
       } else {

@@ -7,10 +7,6 @@ import './Notes.css';
 import { s3Upload } from '../libs/awsLib';
 
 export default function Notes(props) {
-  // const file = useRef(null);
-  // const [note, setNote] = useState(null);
-  // const [content, setContent] = useState('');
-
   const file = useRef(null);
   const [note, setNote] = useState(null);
   const [content, setContent] = useState('');
@@ -53,22 +49,6 @@ export default function Notes(props) {
     file.current = event.target.files[0];
   }
 
-  // async function handleSubmit(event) {
-  //   let attachment;
-
-  //   event.preventDefault();
-
-  //   if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
-  //     alert(
-  //       `Please pick a file smaller than ${config.MAX_ATTACHMENT_SIZE /
-  //         1000000} MB.`
-  //     );
-  //     return;
-  //   }
-
-  //   setIsLoading(true);
-  // }
-
   function saveNote(note) {
     return API.put('notes', `/notes/${props.match.params.id}`, {
       body: note
@@ -107,20 +87,6 @@ export default function Notes(props) {
       setIsLoading(false);
     }
   }
-
-  // async function handleDelete(event) {
-  //   event.preventDefault();
-
-  //   const confirmed = window.confirm(
-  //     'Are you sure you want to delete this note?'
-  //   );
-
-  //   if (!confirmed) {
-  //     return;
-  //   }
-
-  //   setIsDeleting(true);
-  // }
 
   function deleteNote() {
     return API.del('notes', `/notes/${props.match.params.id}`);

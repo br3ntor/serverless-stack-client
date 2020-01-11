@@ -17,25 +17,6 @@ function querystring(name, url = window.location.href) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
-// export default function UnauthenticatedRoute({
-//   component: C,
-//   appProps,
-//   ...rest
-// }) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={props =>
-//         !appProps.isAuthenticated ? (
-//           <C {...props} {...appProps} />
-//         ) : (
-//           <Redirect to="/" />
-//         )
-//       }
-//     />
-//   );
-// }
-
 export default function UnauthenticatedRoute({
   component: C,
   appProps,
