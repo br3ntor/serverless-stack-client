@@ -1,10 +1,10 @@
-import React from 'react';
-import { Button, Glyphicon } from 'react-bootstrap';
-import './LoaderButton.css';
+import React from "react";
+import { Button, Spinner } from "react-bootstrap";
+import "./LoaderButton.css";
 
 export default function LoaderButton({
   isLoading,
-  className = '',
+  className = "",
   disabled = false,
   ...props
 }) {
@@ -14,7 +14,16 @@ export default function LoaderButton({
       disabled={disabled || isLoading}
       {...props}
     >
-      {isLoading && <Glyphicon glyph="refresh" className="spinning" />}
+      {isLoading && (
+        <Spinner
+          className="spinner"
+          animation="border"
+          aria-hidden="true"
+          role="status"
+          as="span"
+          size="sm"
+        />
+      )}
       {props.children}
     </Button>
   );

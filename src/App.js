@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import './App.css';
-import Routes from './Routes';
-import { Auth } from 'aws-amplify';
+import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import "./App.css";
+import Routes from "./Routes";
+import { Auth } from "aws-amplify";
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -19,7 +19,7 @@ function App(props) {
       await Auth.currentSession();
       userHasAuthenticated(true);
     } catch (e) {
-      if (e !== 'No current user') {
+      if (e !== "No current user") {
         alert(e);
       }
     }
@@ -32,41 +32,56 @@ function App(props) {
 
     userHasAuthenticated(false);
 
-    props.history.push('/login');
+    props.history.push("/login");
   }
-
   return (
     !isAuthenticating && (
       <div className="App container">
-        <Navbar fluid collapseOnSelect>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <Link to="/">Scratch</Link>
-            </Navbar.Brand>
-            <Navbar.Toggle />
-          </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+          <Navbar.Brand>
+            <Link to="/" className="text-secondary">
+              Scratch
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse
+            id="responsive-navbar-nav"
+            className="justify-content-end"
+          >
+            <Nav>
               {isAuthenticated ? (
                 <>
                   <LinkContainer to="/settings">
-                    <NavItem>Settings</NavItem>
+                    <Nav.Link
+                      active={props.history.location.pathname === "/settings"}
+                    >
+                      Settings
+                    </Nav.Link>
                   </LinkContainer>
-                  <NavItem onClick={handleLogout}>Logout</NavItem>
+                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 </>
               ) : (
                 <>
                   <LinkContainer to="/signup">
-                    <NavItem>Signup</NavItem>
+                    <Nav.Link
+                      active={props.history.location.pathname === "/signup"}
+                    >
+                      Signup
+                    </Nav.Link>
                   </LinkContainer>
                   <LinkContainer to="/login">
-                    <NavItem>Login</NavItem>
+                    <Nav.Link
+                      active={props.history.location.pathname === "/login"}
+                    >
+                      Login
+                    </Nav.Link>
                   </LinkContainer>
                 </>
               )}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+
         <Routes appProps={{ isAuthenticated, userHasAuthenticated }} />
       </div>
     )

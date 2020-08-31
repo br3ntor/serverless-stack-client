@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import { CardElement, injectStripe } from 'react-stripe-elements';
-import LoaderButton from './LoaderButton';
-import { useFormFields } from '../libs/hooksLib';
-import './BillingForm.css';
+import React, { useState } from "react";
+import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { CardElement, injectStripe } from "react-stripe-elements";
+import LoaderButton from "./LoaderButton";
+import { useFormFields } from "../libs/hooksLib";
+import "./BillingForm.css";
 
 function BillingForm({ isLoading, onSubmit, ...props }) {
   const [fields, handleFieldChange] = useFormFields({
-    name: '',
-    storage: ''
+    name: "",
+    storage: "",
   });
   const [isProcessing, setIsProcessing] = useState(false);
   const [isCardComplete, setIsCardComplete] = useState(false);
@@ -16,7 +16,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
   isLoading = isProcessing || isLoading;
 
   function validateForm() {
-    return fields.name !== '' && fields.storage !== '' && isCardComplete;
+    return fields.name !== "" && fields.storage !== "" && isCardComplete;
   }
 
   async function handleSubmitClick(event) {
@@ -25,7 +25,7 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
     setIsProcessing(true);
 
     const { token, error } = await props.stripe.createToken({
-      name: fields.name
+      name: fields.name,
     });
 
     setIsProcessing(false);
@@ -35,8 +35,8 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
 
   return (
     <form className="BillingForm" onSubmit={handleSubmitClick}>
-      <FormGroup bsSize="large" controlId="storage">
-        <ControlLabel>Storage</ControlLabel>
+      <FormGroup size="lg" controlId="storage">
+        <FormLabel>Storage</FormLabel>
         <FormControl
           min="0"
           type="number"
@@ -46,8 +46,8 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
         />
       </FormGroup>
       <hr />
-      <FormGroup bsSize="large" controlId="name">
-        <ControlLabel>Cardholder&apos;s name</ControlLabel>
+      <FormGroup size="lg" controlId="name">
+        <FormLabel>Cardholder&apos;s name</FormLabel>
         <FormControl
           type="text"
           value={fields.name}
@@ -55,18 +55,18 @@ function BillingForm({ isLoading, onSubmit, ...props }) {
           placeholder="Name on the card"
         />
       </FormGroup>
-      <ControlLabel>Credit Card Info</ControlLabel>
+      <FormLabel>Credit Card Info</FormLabel>
       <CardElement
         className="card-field"
-        onChange={e => setIsCardComplete(e.complete)}
+        onChange={(e) => setIsCardComplete(e.complete)}
         style={{
-          base: { fontSize: '18px', fontFamily: '"Open Sans", sans-serif' }
+          base: { fontSize: "18px", fontFamily: '"Open Sans", sans-serif' },
         }}
       />
       <LoaderButton
         block
         type="submit"
-        bsSize="large"
+        size="lg"
         isLoading={isLoading}
         disabled={!validateForm()}
       >
