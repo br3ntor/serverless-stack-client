@@ -67,9 +67,9 @@ export default function NewNote(props) {
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
+          size="lg"
           block
           type="submit"
-          siez="lg"
           variant="primary"
           isLoading={isLoading}
           disabled={!validateForm()}
