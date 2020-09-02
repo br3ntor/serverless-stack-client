@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { LinkContainer, IndexLinkContainer } from "react-router-bootstrap";
 import "./App.css";
 import Routes from "./Routes";
 import { Auth } from "aws-amplify";
@@ -34,6 +34,7 @@ function App(props) {
 
     props.history.push("/login");
   }
+
   return (
     !isAuthenticating && (
       <div className="App container">
@@ -51,6 +52,11 @@ function App(props) {
             <Nav>
               {isAuthenticated ? (
                 <>
+                  <IndexLinkContainer to="/">
+                    <Nav.Link active={props.history.location.pathname === "/"}>
+                      Notes
+                    </Nav.Link>
+                  </IndexLinkContainer>
                   <LinkContainer to="/settings">
                     <Nav.Link
                       active={props.history.location.pathname === "/settings"}
@@ -88,5 +94,4 @@ function App(props) {
   );
 }
 
-// export default App;
 export default withRouter(App);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { API } from "aws-amplify";
-import { ListGroup, Spinner, Container } from "react-bootstrap";
+import { ListGroup, Spinner, Container, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 
@@ -43,9 +43,9 @@ export default function Home(props) {
               <h5>{note.content.trim().split("\n")[0]}</h5>
               {"Created: " + new Date(note.createdAt).toLocaleString()}
               {note.attachment && (
-                <span className="badge badge-secondary badge-pill float-right">
+                <Badge className="float-right" variant="secondary" pill>
                   Attachment
-                </span>
+                </Badge>
               )}
             </ListGroup.Item>
           </LinkContainer>
@@ -81,7 +81,7 @@ export default function Home(props) {
   function renderNotes() {
     return (
       <div className="notes">
-        <h1>Your Notes</h1>
+        <h1>Notes</h1>
         <ListGroup>
           {!isLoading ? (
             renderNotesList(notes)

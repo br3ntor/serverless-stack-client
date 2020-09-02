@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { API, Storage } from "aws-amplify";
-import { Form } from "react-bootstrap";
+import { Form, Container, Spinner } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import config from "../config";
 import "./Notes.css";
@@ -119,7 +119,7 @@ export default function Notes(props) {
 
   return (
     <div className="Notes">
-      {note && (
+      {note ? (
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="content">
             <Form.Control
@@ -168,6 +168,10 @@ export default function Notes(props) {
             Delete
           </LoaderButton>
         </Form>
+      ) : (
+        <Container className="d-flex justify-content-center">
+          <Spinner animation="border" variant="primary" />
+        </Container>
       )}
     </div>
   );

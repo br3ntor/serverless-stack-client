@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Alert } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import "./Signup.css";
@@ -97,6 +97,17 @@ export default function Signup(props) {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
+        <Alert variant="warning">
+          <Alert.Heading>Password rules:</Alert.Heading>
+          <hr />
+          <ul>
+            <li>Minimum length 8</li>
+            <li>Requires number</li>
+            <li>Requires special character</li>
+            <li>Requires uppercase letters</li>
+            <li>Requires lowercase letters</li>
+          </ul>
+        </Alert>
         <Form.Group controlId="email" size="lg">
           <Form.Label>Email</Form.Label>
           <Form.Control
