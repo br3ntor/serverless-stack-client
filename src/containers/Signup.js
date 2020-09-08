@@ -40,6 +40,7 @@ export default function Signup(props) {
       setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {
+      console.log(e);
       if (e.code === "UsernameExistsException") {
         const unconfirmedUser = await Auth.resendSignUp(fields.email);
         setNewUser(unconfirmedUser);

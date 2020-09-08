@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Auth } from "aws-amplify";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
 import "./Login.css";
@@ -27,6 +28,7 @@ export default function Login(props) {
       // props.history.push('/');
     } catch (e) {
       alert(e.message);
+      console.log(e.message);
       setIsLoading(false);
     }
   }
@@ -51,6 +53,7 @@ export default function Login(props) {
             onChange={handleFieldChange}
           />
         </Form.Group>
+        <Link to="/login/reset">Forgot password?</Link>
         <LoaderButton
           block
           type="submit"
