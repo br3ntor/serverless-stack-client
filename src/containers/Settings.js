@@ -3,8 +3,6 @@ import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Settings.css";
 
-// import { useRouteMatch, Route, Switch } from "react-router-dom";
-
 export default function Settings() {
   return (
     <div className="Settings">

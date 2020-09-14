@@ -18,16 +18,6 @@ export default function ChangeEmail() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
-  // useEffect(() => {
-  //   checkIfVerified();
-  // }, []);
-
-  // async function checkIfVerified() {
-  //   // const user = await Auth.userAttributes()
-  //   const user = await Auth.currentAuthenticatedUser();
-  //   console.log(user);
-  // }
-
   function validateEmailForm() {
     return fields.email.length > 0;
   }
@@ -88,7 +78,6 @@ export default function ChangeEmail() {
           size="lg"
           isLoading={isSendingCode}
           disabled={!validateEmailForm()}
-          variant="light"
         >
           Update Email
         </LoaderButton>
